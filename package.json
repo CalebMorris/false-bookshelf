@@ -1,0 +1,37 @@
+{
+  "name": "false-bookshelf",
+  "version": "0.0.1",
+  "description": "Mocked Bookshelf Structure to isolate IO for testing",
+  "main": "dist/false-bookshelf.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calebmorris/false-bookshelf"
+  },
+  "scripts": {
+    "prepublish": "npm run dist && npm run test",
+    "clean": "rm -Rf ./dist ./coverage",
+    "dist": "npm run clean && ./node_modules/.bin/babel src/ --modules common --out-dir dist",
+    "test": "./node_modules/.bin/mocha --recursive --compilers js:babel/register",
+    "lint": "./node_modules/.bin/eslint --ext .js .",
+    "lint-quiet": "./node_modules/.bin/eslint --ext .js --quiet .",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive --compilers js:babel/register"
+  },
+  "author": {
+    "name": "Caleb Morris",
+    "email": "caleb.morris.g@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^4.7.16",
+    "bluebird": "^2.9.21",
+    "eslint": "^0.18.0",
+    "joi": "^6.0.8",
+    "lodash": "^3.6.0"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "istanbul": "^0.3.13",
+    "mocha": "^2.2.1",
+    "proxyquire": "^1.4.0"
+  }
+}
