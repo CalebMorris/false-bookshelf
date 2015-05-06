@@ -2,7 +2,7 @@
   "name": "false-bookshelf",
   "version": "0.0.1",
   "description": "Mocked Bookshelf Structure to isolate IO for testing",
-  "main": "dist/false-bookshelf.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/calebmorris/false-bookshelf"
@@ -26,7 +26,8 @@
     "bluebird": "^2.9.21",
     "eslint": "^0.18.0",
     "joi": "^6.0.8",
-    "lodash": "^3.6.0"
+    "lodash": "^3.6.0",
+    "sinon": "^1.14.1"
   },
   "devDependencies": {
     "chai": "^2.3.0",
