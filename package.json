@@ -8,7 +8,7 @@
     "url": "https://github.com/calebmorris/false-bookshelf"
   },
   "scripts": {
-    "prepublish": "npm run dist && npm run test",
+    "postinstall": "npm run dist && npm run test",
     "clean": "rm -Rf ./dist ./coverage",
     "dist": "npm run clean && ./node_modules/.bin/babel src/ --modules common --out-dir dist",
     "test": "./node_modules/.bin/mocha --recursive --compilers js:babel/register",
