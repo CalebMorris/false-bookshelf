@@ -25,6 +25,9 @@ class BaseModel {
 
     let ExtendedClass = class extends this {
       constructor() {
+
+        super();
+
         _.each(protoProps, (protoProp, key) => {
           this[key] = protoProp;
         });
