@@ -31,6 +31,24 @@ class BaseModel {
         _.each(protoProps, (protoProp, key) => {
           this[key] = protoProp;
         });
+
+        _.each(ExtendedClass.shims, (shim) => {
+
+          shim.apply(this);
+
+        });
+
+        ExtendedClass.shims = [];
+
+      }
+
+      static registerShim(shim) {
+        if (! this.shims) {
+          this.shims = [ shim ];
+        }
+        else {
+          this.shims.push(shim);
+        }
       }
     };
 
