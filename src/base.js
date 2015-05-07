@@ -45,8 +45,7 @@ class BaseModel {
       static registerShim(shim) {
         if (! this.shims) {
           this.shims = [ shim ];
-        }
-        else {
+        } else {
           this.shims.push(shim);
         }
       }
