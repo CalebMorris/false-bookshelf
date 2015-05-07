@@ -1,6 +1,7 @@
 import { stub } from 'sinon';
 
 import { BaseModel } from './base';
+import { NotFoundError } from './errors'
 
 class MockModel extends BaseModel {
 
@@ -20,5 +21,7 @@ class MockModel extends BaseModel {
   }
 
 }
+
+MockModel.NotFoundError = NotFoundError;
 
 export default { MockModel };
