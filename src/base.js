@@ -12,6 +12,7 @@ class BaseModel {
     this.query = stub();
     this.load = stub();
 
+    this.resetQuery = stub();
     this.parse = stub();
     this.toJSON = stub();
 
