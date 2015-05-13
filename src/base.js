@@ -1,65 +1,60 @@
 import _ from 'lodash';
-import { inherits } from 'util';
 import { stub } from 'sinon';
 
-class BaseModel {
+import { extend } from './util';
 
-  constructor(attributes, options) {
+function BaseModel() {}
 
-    this.set = stub();
-    this.get = stub();
-    this.fetch = stub();
-    this.query = stub();
-    this.load = stub();
+BaseModel.prototype = {
+  set : stub(),
+  get : stub(),
+  fetch : stub(),
+  query : stub(),
+  load : stub(),
 
-    this.resetQuery = stub();
-    this.parse = stub();
-    this.toJSON = stub();
+  resetQuery : stub(),
+  parse : stub(),
+  toJSON : stub(),
+};
 
-  }
+BaseModel.forge = function() {
+  return new this();
+};
 
-  static forge() {
-    return new this();
-  }
+BaseModel.extend = function(protoProps, classProperties) {
 
-  static extend(protoProps, classProperties) {
+  let ExtendedClass = function() {
+    ExtendedClass.super_.apply(this, arguments);
 
-    let ExtendedClass = class extends this {
-      constructor() {
-
-        super();
-
-        _.each(protoProps, (protoProp, key) => {
-          this[key] = protoProp;
-        });
-
-        _.each(ExtendedClass.shims, (shim) => {
-
-          shim.apply(this);
-
-        });
-
-        ExtendedClass.shims = [];
-
-      }
-
-      static registerShim(shim) {
-        if (! this.shims) {
-          this.shims = [ shim ];
-        } else {
-          this.shims.push(shim);
-        }
-      }
-    };
-
-    _.each(classProperties, (classProp, key) => {
-      ExtendedClass[key] = classProp;
+    _.each(protoProps, (protoProp, key) => {
+      this[key] = protoProp;
     });
 
-    return ExtendedClass;
+    _.each(ExtendedClass.shims, (shim) => {
 
-  }
+      shim.apply(this);
 
-}
+    });
+
+    ExtendedClass.shims = [];
+  };
+
+  ExtendedClass.registerShim = function(shim) {
+    if (! this.shims) {
+      this.shims = [ shim ];
+    } else {
+      this.shims.push(shim);
+    }
+  };
+
+  extend(ExtendedClass, this);
+
+  _.each(classProperties, (classProp, key) => {
+    ExtendedClass[key] = classProp;
+  });
+
+  return ExtendedClass;
+
+};
 
 export default { BaseModel };
