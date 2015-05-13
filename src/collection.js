@@ -1,25 +1,24 @@
 import { stub } from 'sinon';
 
+import { extend } from './util';
 import { BaseModel } from './base';
 
-class MockCollection extends BaseModel {
-
-  constructor(attributes, options) {
-
-    super();
-
-    this.fetchOne = stub();
-    this.mapThen = stub();
-    this.reduceThen = stub();
-    this.invokeThen = stub();
-    this.add = stub();
-    this.remove = stub();
-    this.reset = stub();
-    this.at = stub();
-    this.create = stub();
-
-  }
-
+function MockCollection() {
+  MockCollection.super_.apply(this, arguments);
 }
+
+MockCollection.prototype = {
+  fetchOne : stub(),
+  mapThen : stub(),
+  reduceThen : stub(),
+  invokeThen : stub(),
+  add : stub(),
+  remove : stub(),
+  reset : stub(),
+  at : stub(),
+  create : stub(),
+};
+
+extend(MockCollection, BaseModel);
 
 export default { MockCollection };
