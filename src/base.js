@@ -26,10 +26,6 @@ BaseModel.extend = function(protoProps, classProperties) {
   let ExtendedClass = function() {
     ExtendedClass.super_.apply(this, arguments);
 
-    _.each(protoProps, (protoProp, key) => {
-      this[key] = protoProp;
-    });
-
     _.each(ExtendedClass.shims, (shim) => {
 
       shim.apply(this);
@@ -39,12 +35,30 @@ BaseModel.extend = function(protoProps, classProperties) {
     ExtendedClass.shims = [];
   };
 
+  ExtendedClass.super_ = BaseModel;
+
+  _.each(protoProps, (protoProp, key) => {
+    ExtendedClass.prototype[key] = protoProp;
+  });
+
   ExtendedClass.registerShim = function(shim) {
     if (! this.shims) {
       this.shims = [ shim ];
     } else {
       this.shims.push(shim);
     }
+  };
+
+  ExtendedClass.reset = function() {
+
+    this.shims = [];
+    _.each(Object.keys(ExtendedClass), (methodKey) => {
+      ExtendedClass[methodKey] = stub();
+    });
+    _.each(Object.keys(ExtendedClass.prototype), (protoKey) => {
+      ExtendedClass.prototype[protoKey] = stub();
+    });
+
   };
 
   extend(ExtendedClass, this);

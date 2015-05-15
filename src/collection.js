@@ -7,6 +7,8 @@ function MockCollection() {
   MockCollection.super_.apply(this, arguments);
 }
 
+MockCollection.super_ = BaseModel;
+
 MockCollection.prototype = {
   fetchOne : stub(),
   mapThen : stub(),

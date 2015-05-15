@@ -1,15 +1,18 @@
 import _ from 'lodash';
-import { inherits } from 'util';
+import { stub } from 'sinon';
 
 function extend(Extended, Base) {
 
-  _.each(Object.keys(Base), (superPropKey) => {
-    Extended[superPropKey] = Base[superPropKey];
+
+  _.each(Object.keys(Base), (superClassKey) => {
+    Extended[superClassKey] = Base[superClassKey];
+  });
+
+  _.each(Object.keys(Base.prototype), (protoKey) => {
+    Extended.prototype[protoKey] = stub();
   });
 
   Extended.prototype = _.merge(Extended.prototype, Base.prototype);
-
-  inherits(Extended, Base);
 
 }
 

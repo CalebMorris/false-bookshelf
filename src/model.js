@@ -6,15 +6,19 @@ import { NotFoundError } from './errors'
 
 function MockModel() {
   MockModel.super_.apply(this, arguments);
+}
 
-  this.fetchAll = stub();
-  this.where = stub();
+MockModel.super_ = BaseModel;
 
-  this.related = stub();
-  this.relatedData = stub();
-  this.save = stub();
-  this.destroy = stub();
-  this.format = stub();
+MockModel.prototype = {
+  fetchAll : stub(),
+  where : stub(),
+
+  related : stub(),
+  relatedData : stub(),
+  save : stub(),
+  destroy : stub(),
+  format : stub(),
 }
 
 MockModel.NotFoundError = NotFoundError;
