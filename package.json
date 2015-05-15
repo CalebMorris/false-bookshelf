@@ -1,6 +1,6 @@
 {
   "name": "false-bookshelf",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Mocked Bookshelf Structure to isolate IO for testing",
   "main": "dist/index.js",
   "repository": {
